@@ -1,0 +1,30 @@
+// question link :- https://leetcode.com/problems/domino-and-tromino-tiling/
+
+// Here , with 1 tile we can make 1 domino , with 2 we can make 2 type verticle and horizontal , with 3 , we can make all 3 verticle  - 1 type , 3 horizntal of 2 type , and 2 intermixed type so in total 5
+class Solution {
+public:
+    long long dp[100000];
+    
+    long long find ( int n){
+        if ( n < 0 ) return 0;
+        
+        if ( dp[n] != -1 ) return dp[n];
+        
+        
+            dp[n] = ((2 * ( find ( n - 1) % 1000000007 ) + find ( n - 3) ) % 1000000007);
+        
+        
+        return dp[n];
+    }
+    int numTilings(int n) {
+        memset( dp , -1 , sizeof(dp) );
+        dp[0] = 1;
+        dp[1] = 1;
+        dp[2] = 2;
+        
+        
+        long long ans = find ( n );
+        
+        return ans;
+    }
+};
